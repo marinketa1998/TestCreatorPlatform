@@ -1,0 +1,5 @@
+<h4 class="mt-4">Profile Page</h4>
+  
+<p *ngIf="user">Logged in as: {{ user?.email }} - {{ user?.displayName }}</p>
+
+<button class="btn btn-primary" *ngIf="user" (click)="logout()">Logout</button>
