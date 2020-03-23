@@ -25,6 +25,8 @@ import{ConfirmEqualValidatorDirective} from './shared/confirm-equal-validator-di
 import { ProfilepageComponent } from './profilepage/profilepage.component';
 import { CreatetestComponent } from './createtest/createtest.component';
 import { StarttestComponent } from './starttest/starttest.component';
+import { ResetPasswordRequestComponent } from './auth/reset-password-request/reset-password-request.component';
+import { ConfirmPasswordResetComponent } from './auth/confirm-password-reset/confirm-password-reset.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +39,8 @@ import { StarttestComponent } from './starttest/starttest.component';
     ProfilepageComponent,
     CreatetestComponent,
     StarttestComponent,
+    ResetPasswordRequestComponent,
+    ConfirmPasswordResetComponent,
   ],
   imports: [
     BrowserModule,

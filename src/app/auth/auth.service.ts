@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ThrowStmt } from '@angular/compiler';
 import { BehaviorSubject } from 'rxjs';
+import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,11 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private db: AngularFirestore,
-    private router: Router) { }
+    private fb:FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router) {}
+  
+
 
   getUserState() {
     return this.afAuth.authState;
@@ -68,7 +73,51 @@ export class AuthService {
   }
 
   logout() {
+    this.afAuth.auth.signOut();
     this.router.navigate(['/homepage']);
-    //return this.afAuth.auth.signOut();
+    
   }
+
+  frmPasswordReset: FormGroup = this.fb.group({
+    email: [null, [Validators.required, Validators.email]]
+  });
+
+ sendPasswordResetRequest()
+ {
+
+    const email ='manolache_deyutza@yahoo.com';
+    //this.frmPasswordReset.get('email').value;
+    console.log(email);
+    this.afAuth.auth.sendPasswordResetEmail(email).then(
+      () => {
+        console.log("Email sent");
+        this.router.navigate(['/homepage']);
+      },
+       error => {
+          this.eventAuthError.next(error);
+      }
+    );
+ }
+ frmSetNewPassword = this.fb.group({
+  password: [null, [Validators.required]],
+  confirmPassword: [null, [Validators.required]]
+});
+
+setPassword()
+{
+
+const password = this.frmSetNewPassword.controls['password'].value;
+const confirmPassword = this.frmSetNewPassword.controls['confirmPassword'].value;
+const user = this.afAuth.auth.currentUser;
+
+user.updatePassword(password).then(function() {
+  console.log("Change password succesfully");
+  this.router.navigate(['/homepage']);
+
+}).catch(function(error) {
+  console.log("Error happened");
+});
+
+}
+
 }

@@ -4,8 +4,8 @@ import { HomePageComponent } from './homepage/homepage.component';
 import { ProfilepageComponent } from './profilepage/profilepage.component';
 import { CreatetestComponent } from './createtest/createtest.component';
 import { StarttestComponent } from './starttest/starttest.component';
-
-
+import { ResetPasswordRequestComponent } from './auth/reset-password-request/reset-password-request.component';
+import { ConfirmPasswordResetComponent } from './auth/confirm-password-reset/confirm-password-reset.component';
 const routes: Routes = [
   {
     path:'profilepage',
@@ -27,6 +27,16 @@ const routes: Routes = [
   {
     path:'starttest',
     component:StarttestComponent
+  },
+
+  {
+    path:'reset-password-request',
+    component:ResetPasswordRequestComponent
+  },
+
+  {
+    path:'confirm-password-reset',
+    component:ConfirmPasswordResetComponent
   }
 
 
