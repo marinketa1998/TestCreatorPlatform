@@ -1,8 +1,12 @@
-<h1>
-  Welcome to Test Creator Platform!
-</h1>
-<hr>
-<table style="width:100%, table-layout:fixed;">
+<html>
+<head>
+</head>
+<body>
+  <h1>
+    Welcome to Test Creator Platform!
+  </h1>
+  <hr>
+<table style="width:100%, table-layout=fixed">
 <tr>
     <th>
 
@@ -42,8 +46,14 @@
 </h1>
 <div>
 <label>Start your test!</label>
+<label>Enter code</label>
+<input  ngModel #code="ngModel" name="code" type="text" required>
+<span class="help-block" *ngIf="!code.valid && code.touched">Your code is inccorect</span>
 <button routerLink="/starttest" class="btn btn-primary" type="submit">StartTest</button>
 </div>
 
 <router-outlet></router-outlet>
 
+</body>
+
+</html>

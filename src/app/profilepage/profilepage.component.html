@@ -1,5 +1,30 @@
-<h4 class="mt-4">Profile Page</h4>
-  
-<p *ngIf="user">Logged in as: {{ user?.email }} - {{ user?.displayName }}</p>
+
+<h3 *ngIf="user">Logged in as:{{ user?.displayName }}</h3>
+
+
+<table>
+<tr>
+    <th>
+ 
+   <label>Try to create another test!</label>
+   <button routerLink="/createtest" class="btn btn-primary" type="submit">CreateTest</button>
+
+    </th>
+ <th>
+ <p>
+     Welcome to your profile page!Here you can see your quizzes,edit them and also create new ones.Enjoy this platform! 
+ </p>
+
+ <img src="./assets/quiz2.jpg" alt="Quiz">
+
+</th>
+
+</tr>
+</table>
 
 <button class="btn btn-primary" *ngIf="user" (click)="logout()">Logout</button>
+
+
+
+
+

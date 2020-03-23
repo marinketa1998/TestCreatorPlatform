@@ -32,7 +32,7 @@ export class AuthService {
       })
       .then(userCredential => {
         if(userCredential) {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/profilepage']);
         }
       });
   }
@@ -63,8 +63,7 @@ export class AuthService {
     return this.db.doc(`Users/${userCredential.user.uid}`).set({
       email: this.newUser.email,
       firstname: this.newUser.firstName,
-      lastname: this.newUser.lastName,
-      role: 'network user'
+      lastname: this.newUser.lastName
     })
   }
 
