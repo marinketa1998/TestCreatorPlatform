@@ -81,14 +81,13 @@ export class AuthService {
   frmPasswordReset: FormGroup = this.fb.group({
     email: [null, [Validators.required, Validators.email]]
   });
-
- sendPasswordResetRequest()
+  
+ sendPasswordResetRequest(mail:string)
  {
 
-    const email ='manolache_deyutza@yahoo.com';
-    //this.frmPasswordReset.get('email').value;
+    const email =mail;
     console.log(email);
-    this.afAuth.auth.sendPasswordResetEmail(email).then(
+    return this.afAuth.auth.sendPasswordResetEmail(email).then(
       () => {
         console.log("Email sent");
         this.router.navigate(['/homepage']);
@@ -108,6 +107,7 @@ setPassword()
 
 const password = this.frmSetNewPassword.controls['password'].value;
 const confirmPassword = this.frmSetNewPassword.controls['confirmPassword'].value;
+console.log(password);
 const user = this.afAuth.auth.currentUser;
 
 user.updatePassword(password).then(function() {

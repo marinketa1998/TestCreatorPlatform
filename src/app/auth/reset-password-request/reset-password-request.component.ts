@@ -18,8 +18,8 @@ export class ResetPasswordRequestComponent implements OnInit {
     })
   }
 
-  sendPasswordResetRequest()
+  sendPasswordResetRequest(frm)
   {
-    this.auth.sendPasswordResetRequest();
+    this.auth.sendPasswordResetRequest(frm.value.email);
   }
 }
