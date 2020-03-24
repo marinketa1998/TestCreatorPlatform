@@ -18,9 +18,9 @@ export class ConfirmPasswordResetComponent implements OnInit {
     })
   }
 
-  setPassword()
+  setPassword(frm)
   {
-    this.auth.setPassword();
+    this.auth.setPassword(frm.value.password);
 
   }
 

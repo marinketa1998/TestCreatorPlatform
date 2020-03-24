@@ -14,8 +14,8 @@ export class AuthService {
 
   private eventAuthError = new BehaviorSubject<string>("");
   eventAuthError$ = this.eventAuthError.asObservable();
-
   newUser: any;
+  user:any;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -97,26 +97,29 @@ export class AuthService {
       }
     );
  }
+
  frmSetNewPassword = this.fb.group({
   password: [null, [Validators.required]],
   confirmPassword: [null, [Validators.required]]
 });
 
-setPassword()
+setPassword(pass:string)
 {
 
-const password = this.frmSetNewPassword.controls['password'].value;
-const confirmPassword = this.frmSetNewPassword.controls['confirmPassword'].value;
+const password = pass;
 console.log(password);
-const user = this.afAuth.auth.currentUser;
+const code = this.route.snapshot.queryParams['oobCode'];
 
-user.updatePassword(password).then(function() {
-  console.log("Change password succesfully");
-  this.router.navigate(['/homepage']);
-
-}).catch(function(error) {
-  console.log("Error happened");
-});
+this.afAuth.auth.confirmPasswordReset(code, password)
+  .then(
+    () => {
+      console.log("Password Changed");
+      this.router.navigate(['/homepage']);
+    },
+  error => {
+    this.eventAuthError.next(error);
+  }
+  );
 
 }
 
