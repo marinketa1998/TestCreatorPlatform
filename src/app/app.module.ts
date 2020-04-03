@@ -10,7 +10,7 @@ import { CreateAccountComponent } from './auth/create-account/create-account.com
 import { LoginComponent } from './auth/login/login.component';
 import { ServicesComponent } from './services/services.component';
 import { FirebaseComponent } from './services/firebase/firebase.component';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,6 +27,8 @@ import { CreatetestComponent } from './createtest/createtest.component';
 import { StarttestComponent } from './starttest/starttest.component';
 import { ResetPasswordRequestComponent } from './auth/reset-password-request/reset-password-request.component';
 import { ConfirmPasswordResetComponent } from './auth/confirm-password-reset/confirm-password-reset.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ModelComponent } from './model/model.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +60,8 @@ import { ConfirmPasswordResetComponent } from './auth/confirm-password-reset/con
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

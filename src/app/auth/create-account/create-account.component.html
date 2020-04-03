@@ -1,6 +1,4 @@
-
 <h2>Whould you like to create an account?</h2>
-
 <div class="row mt-4">
   <div class="col-12">
     <div class="row" *ngIf="authError">
@@ -8,6 +6,7 @@
         {{ authError?.message }}
       </div>
     </div>
+
 
     <form #userRegForm="ngForm" (ngSubmit)="createUser(userRegForm)">
       <div>
@@ -53,7 +52,7 @@
 
         <div class="row">
           <div class="col-md-12">
-            <button class="btn btn-primary" type="submit" [disabled]="!userRegForm.valid || password.value!=Cpassword.value">Create Account</button>
+            <button mat-button (click)="openSnackBar('Your account has been created','Close')" name='Button' class="btn btn-primary" type="submit" [disabled]="!userRegForm.valid || password.value!=Cpassword.value">Create Account</button>
           </div>
         </div>
  

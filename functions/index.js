@@ -1,30 +1,40 @@
-const functions = require('firebase-functions');
-const nodemailer=require('nodemailer');
-const admin=require('firebase-admin');
-admin.initializeApp()
-require('dotenv').config();
+const admin = require("firebase-admin");
+admin.initializeApp();
+const nodemailer = require('nodemailer');
+const gmailEmail = encodeURIComponent(functions.config().gmail.email);
+const gmailPassword = encodeURIComponent(functions.config().gmail.password);
 
-
-const {SENDER_EMAIL,SENDER_PASSWORD}= process.env;
-
-exports.sendEmailNotification=functions.firestore.document('submissions/{docId}')
-.onCreate((snap,ctx)=>{
-    const data=snap.data();
-    let authData=nodemailer.createTransport({
-        host:'smtp.gmail.com',
-        port:465,
-        secure:true,
-        auth:{
-            user:SENDER_EMAIL,
-            pass:SENDER_PASSWORD
-        }
-    });
-authData.sendMail({
-from :'info.truly@makethatapp.com',
-to:`${data.email}`,
-subject:'Your submission Info',
-text:`${data.email}`,
-html:`${data.email}`,
-}).then(res=>console.log('successfully sent that mail')).catch(err=>console.log(err));
-
+var transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+        user: '********@gmail.com',
+        pass: '************'
+    }
 });
+
+exports.sendContactMessage = functions.firestore.document('/Codes/{code}').onCreate(snap,context => {
+    //const snapshot = event.data;
+  // Only send email for new messages.
+    if (snap.previous.val() || !snap.val().email) {
+      return;
+    }
+    
+    
+    const mailOptions = {
+        from:`noreply@testcreatordatabase.firebaseapp.com`,
+        to: snap.data().email,
+        subject: 'contact form message',
+        html: `<h1>Order Confirmation</h1>
+         <p> <b>Email: </b>${snap.data().email} </p>`
+    };
+
+    return transporter.sendMail(mailOptions, (error, data) => {
+        if (error) {
+            console.log(error)
+            return
+        }
+        console.log("Sent!")
+    })
+  });
