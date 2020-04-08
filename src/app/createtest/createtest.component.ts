@@ -75,8 +75,8 @@ verifyUserHasAccount(email:string)
     i=>
     {
       console.log(i.data().email);
-       if(i.data().email===email)console.log("good");
-       else console.log("bad");
+      // if(i.data().email===email)console.log("good");
+      // else console.log("bad");
           
     }
     )
