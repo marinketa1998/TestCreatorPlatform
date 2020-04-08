@@ -62,6 +62,7 @@ import { ModelComponent } from './model/model.component';
     MatListModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

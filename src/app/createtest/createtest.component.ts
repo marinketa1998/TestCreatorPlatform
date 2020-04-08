@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth/auth.service';
 import { ModelComponent } from '../model/model.component';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { from } from 'rxjs';
+import * as firebase from 'firebase';
+
 
 @Component({
   selector: 'app-createtest',
@@ -18,7 +18,7 @@ export class CreatetestComponent implements OnInit {
 
   constructor(
     private db: AngularFirestore,
-
+   
   ) { }
 
   ngOnInit() {
@@ -26,53 +26,38 @@ export class CreatetestComponent implements OnInit {
     this.arrayOfQuestion.push(this.model);
   }
 
-  storeToDataBase(email)
+  storeToDataBase(email:string)
+{
+  const code=this.generateCode();
+  const myArray=
   {
-    //this.Code=this.generateCode();
-    this.onSubmit(email);
-    const myArray=
-    {
-      "Questions":this.arrayOfQuestion.map((object=>{return Object.assign({}, object)}))
-    }
-    const obj =
-  {
-    "email":email,
-    "array":myArray,
+    "Questions":this.arrayOfQuestion.map((object=>{return Object.assign({}, object)}))
   }
-    this.db.collection('Tests').add(obj);
-  }
-
-  addQuestion()
+  const obj =
+{
+  "email":email,
+  "array":myArray,
+  "code":code,
+}
+  const Code=
   {
+    "code":code,
+  }
+  this.db.collection('Tests').add(obj);
+  this.db.collection('Codes').add(Code);
   
-    this.model=new ModelComponent();
-    this.arrayOfQuestion.push(this.model);
+}
 
-  }
+generateCode()
+{
+  return '_' + Math.random().toString(36).substr(2, 9);
+}
 
-  generateCode()
-  {
-    return '_' + Math.random().toString(36).substr(2, 9);
-  }
-
-  onSubmit(email:string) {
-
- 
-    var code=this.generateCode();
-    const message="Your uniq code for the test you habe just created is:"+code;
-    const name="noreply@testcreatordatabase.firebaseapp.com";
-    const date = Date();
-    const html = `
-      <div>From: ${name}</div>
-      <div>Email: <a href="mailto:${email}">${email}</a></div>
-      <div>Date: ${date}</div>
-      <div>Message: ${message}</div>
-    `;
-    
-    let formRequest = {email,code};
-    this.db.collection('Codes').add(formRequest);
-  }
-
-
+addQuestion()
+{
+  this.model=new ModelComponent();
+  this.arrayOfQuestion.push(this.model);
+  
+}
 
 }
