@@ -68,7 +68,7 @@
         <div class="row">
           <div class="col-md-12">
             <button (click)="addQuestion()" class="btn btn-primary">Add Question</button>
-            <button (click)="storeToDataBase(email.value)" name='Button' class="btn btn-primary" type="submit" [disabled]="!TestForm.valid || !QuestionForm.valid">Create Test</button>
+            <button (click)="[storeToDataBase(email.value),deleteFromDataBase()]" name='Button' class="btn btn-primary" type="submit" [disabled]="!TestForm.valid || !QuestionForm.valid">Create Test</button>
           </div>
         </div>
         </div>
